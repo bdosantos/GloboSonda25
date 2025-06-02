@@ -14,15 +14,19 @@
         <!-- Carga de modelos -->
         <a-assets>
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
+            <a-asset-item id="globo-glb" src="globo.glb"></a-asset-item>
         </a-assets>
 
         <!-- Cámara VR con mayor velocidad -->
-        <a-entity id="cameraRig" position="0 1,6 0">
+        <a-entity id="cameraRig" position="0 1.6 0">
             <a-entity camera look-controls wasd-controls="acceleration: 100" position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
-        <a-entity gltf-model="#museo-glb" scale="2 1 1" position="0 0 0" static-body></a-entity>
+        <a-entity gltf-model="#museo-glb" scale="2 1 1" position="0 0 0" static-body>
+            <!-- Globo dentro del museo -->
+            <a-entity gltf-model="#globo-glb" scale="0.5 0.5 0.5" position="0 0.5 0"></a-entity>
+        </a-entity>
     </a-scene>
 </body>
 </html>
