@@ -17,9 +17,9 @@
             <a-asset-item id="globo-glb" src="globo.glb"></a-asset-item>
         </a-assets>
 
-        <!-- Cámara VR con mayor velocidad -->
+        <!-- Cámara VR -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity camera look-controls wasd-controls="acceleration: 100" position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 50" position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
@@ -28,5 +28,19 @@
             <a-entity gltf-model="#globo-glb" scale="0.5 0.5 0.5" position="0 0.5 0"></a-entity>
         </a-entity>
     </a-scene>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let camera = document.querySelector("#camera");
+
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Si es un móvil, velocidad más rápida
+                camera.setAttribute("wasd-controls", "acceleration: 100");
+            } else {
+                // Si es un ordenador, velocidad estándar
+                camera.setAttribute("wasd-controls", "acceleration: 50");
+            }
+        });
+    </script>
 </body>
 </html>
