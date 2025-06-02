@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<html>
-  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,14 +9,20 @@
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
 </head>
- <body>
+<body>
     <a-scene physics="debug: false">
         <!-- Carga de modelos -->
         <a-assets>
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
-          </a-assets>
-      <!-- Modelo 3D del museo -->
-        <a-entity gltf-model="#museo-glb" scale="10 10 10" position="10 0 10" static-body>
-  </body>
-          
+        </a-assets>
+
+        <!-- Cámara VR -->
+        <a-entity id="cameraRig" position="0 1.6 0">
+            <a-entity camera look-controls wasd-controls position="0 0 0"></a-entity>
+        </a-entity>
+
+        <!-- Modelo 3D del museo -->
+        <a-entity gltf-model="#museo-glb" scale="10 10 10" position="10 0 10" static-body></a-entity>
+    </a-scene>
+</body>
 </html>
