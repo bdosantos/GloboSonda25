@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Escena vacía en A-Frame</title>
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene></a-scene>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sírfidos Vs Pulgonautas: Misión Estratosfera</title>
+    <meta name="author" content="Elisa Garzo y María Ángeles Marcos García">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
+</head>
+ <body>
+    <a-scene physics="debug: false">
+        <!-- Carga de modelos -->
+        <a-assets>
+            <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
+          </a-assets>
+      <!-- Modelo 3D del museo -->
+        <a-entity gltf-model="#museo-glb" scale="10 10 10" position="10 0 10" static-body>
   </body>
+          
 </html>
