@@ -19,7 +19,7 @@
 
         <!-- Cámara VR -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 500" position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 50" position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
@@ -35,7 +35,7 @@
 
             if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                 // Si es un móvil, velocidad más rápida
-                camera.setAttribute("wasd-controls", "acceleration: 100");
+                camera.setAttribute("wasd-controls", "acceleration: 1000");
             } else {
                 // Si es un ordenador, velocidad estándar
                 camera.setAttribute("wasd-controls", "acceleration: 50");
