@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Malasaña en la Estratosfera</title>
     <meta name="author" content="Begoña Dosantos">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
 <body>
-    <a-scene physics="debug: false">
-        <!-- Iluminación para evitar errores visuales -->
-        <a-light type="ambient" color="#FFF"></a-light>
+    <a-scene physics="debug: false" shadow="type: basic" renderer="antialias: false; colorManagement: false; logarithmicDepthBuffer: true">
+        <!-- Iluminación corregida -->
+        <a-light type="ambient" color="#BBB"></a-light>
+        <a-light type="directional" intensity="0.5" position="1 3 1"></a-light>
 
         <!-- Carga de modelos y vídeos -->
         <a-assets>
@@ -23,12 +24,12 @@
         </a-assets>
 
         <!-- Cámara VR dentro del museo -->
-        <a-entity id="cameraRig" position="0 0.25 0">
-            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 80" position="0 0 0"></a-entity>
+        <a-entity id="cameraRig" position="0 0.5 0">
+            <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo (reducido) -->
-        <a-entity gltf-model="#museo2-glb" scale="1 0.5 1" position="-2 0 0">
+        <a-entity gltf-model="#museo2-glb" scale="1 0.5 1" position="0 0 0">
             <a-entity gltf-model="#globo-glb" scale="0.2 0.2 0.2" position="-1 1.2 2"></a-entity>
             <a-entity gltf-model="#Gelectronica-glb" scale="0.1 0.1 0.1" position="0 1 0"></a-entity>
 
@@ -45,7 +46,7 @@
 
             // Ajustar velocidad según el dispositivo
             if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 80"); // Movilidad fluida en móviles y VR
+                camera.setAttribute("wasd-controls", "acceleration: 50"); // Movilidad más estable en móviles y VR
             } else {
                 camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
             }
