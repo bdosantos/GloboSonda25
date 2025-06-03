@@ -5,30 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Malasaña en la Estratosfera</title>
     <meta name="author" content="Begoña Dosantos">
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.124.0/build/three.min.js"></script>
 </head>
 <body>
-    <a-scene physics="debug: false" shadow="type: basic" renderer="antialias: false; colorManagement: false;">
-        <!-- Iluminación para evitar parpadeo -->
-        <a-light type="ambient" color="#FFF"></a-light>
-
+    <a-scene physics="debug: false">
         <!-- Carga de modelos y vídeos -->
         <a-assets>
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
             <a-asset-item id="globo-glb" src="globo.glb"></a-asset-item>
             <a-asset-item id="Gelectronica-glb" src="Gelectronica.glb"></a-asset-item>
-            <video id="videoLanzamiento" src="lanzamiento.mp4" autoplay loop muted playsinline></video>
-            <video id="videoEstratosfera" src="estratosfera.mp4" autoplay loop muted playsinline></video>
-            <video id="videoSeguimiento" src="seguimiento.mp4" autoplay loop muted playsinline></video>
+            <video id="videoLanzamiento" src="lanzamiento.mp4" loop crossorigin="anonymous" playsinline></video>
+            <video id="videoEstratosfera" src="estratosfera.mp4" loop crossorigin="anonymous" playsinline></video>
+            <video id="videoSeguimiento" src="seguimiento.mp4" loop crossorigin="anonymous" playsinline></video>
         </a-assets>
 
-        <!-- Cámara VR con aceleración optimizada -->
+        <!-- Cámara VR y controles adaptados a PC y móvil -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 80" position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
-        <a-entity gltf-model="#museo-glb" scale="1.5 0.75 1.5" position="0 0 0">
+        <a-entity gltf-model="#museo-glb" scale="2 1 2" position="0 0 0">
             <a-entity gltf-model="#globo-glb" scale="0.25 0.25 0.25" position="-3 2.5 6" rotation="90 -90 90"></a-entity>
             <a-entity gltf-model="#Gelectronica-glb" scale="0.15 0.15 0.15" position="-0.25 4 -1.25" rotation="90 0 90"></a-entity>
 
@@ -43,17 +41,17 @@
         document.addEventListener("DOMContentLoaded", function() {
             let camera = document.querySelector("#camera");
 
-            // Ajustar velocidad según el dispositivo
-            if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 80"); // Movilidad fluida en móviles y VR
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Si es un móvil, ajustar controles
+                camera.setAttribute("wasd-controls", "acceleration: 100");
             } else {
-                camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
+                // Si es un ordenador, mantener velocidad estándar
+                camera.setAttribute("wasd-controls", "acceleration: 50");
             }
 
-            // Forzar reproducción automática de vídeos
-            document.querySelectorAll("video").forEach(video => {
-                video.muted = true;
-                video.play().catch(error => console.log("Autoplay bloqueado:", error));
+            // Iniciar vídeos al hacer clic en la pantalla
+            document.addEventListener("click", function() {
+                document.querySelectorAll("video").forEach(video => video.play());
             });
         });
     </script>
