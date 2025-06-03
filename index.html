@@ -9,6 +9,9 @@
 </head>
 <body>
     <a-scene physics="debug: false">
+        <!-- Iluminación ajustada -->
+        <a-light type="ambient" color="#FFF"></a-light>
+
         <!-- Carga de modelos y vídeos -->
         <a-assets>
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
@@ -19,7 +22,7 @@
             <video id="videoSeguimiento" src="seguimiento.mp4" autoplay loop muted playsinline></video>
         </a-assets>
 
-        <!-- Cámara VR con aceleración adaptada -->
+        <!-- Cámara VR con aceleración optimizada -->
         <a-entity id="cameraRig" position="0 1.6 0">
             <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
         </a-entity>
@@ -42,7 +45,7 @@
 
             // Ajustar velocidad según el dispositivo
             if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 500"); // Más rápido en móviles y VR
+                camera.setAttribute("wasd-controls", "acceleration: 150"); // Movilidad fluida en móviles y VR
             } else {
                 camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
             }
