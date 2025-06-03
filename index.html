@@ -15,10 +15,11 @@
       schema: {
         speed: { type: "number", default: 1 }
       },
-      tick: function () {
+      tick: function (_, delta) {
         const direction = new THREE.Vector3();
         this.el.object3D.getWorldDirection(direction);
-        this.el.object3D.position.add(direction.multiplyScalar(this.data.speed));
+        direction.multiplyScalar(this.data.speed * delta / 1000); // Ajuste por tiempo real
+        this.el.object3D.position.add(direction);
       }
     });
   </script>
@@ -40,7 +41,6 @@
         id="camera"
         camera
         look-controls
-        wasd-controls="acceleration: 50"
         position="0 0 0">
       </a-entity>
     </a-entity>
@@ -54,18 +54,21 @@
     </a-entity>
   </a-scene>
 
+  <!-- Activar movimiento automático en VR móvil -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       const camera = document.querySelector("#camera");
+      const scene = document.querySelector("a-scene");
 
       if (isMobile) {
-        document.querySelector("a-scene").addEventListener("enter-vr", function () {
-          // Velocidad muy alta (ajustable)
-          camera.setAttribute("auto-move", "speed: 15");
+        scene.addEventListener("enter-vr", function () {
+          // Añade el componente solo cuando entra en VR
+          camera.setAttribute("auto-move", "speed: 3"); // Puedes probar valores más altos si quieres más velocidad
         });
 
-        document.querySelector("a-scene").addEventListener("exit-vr", function () {
+        scene.addEventListener("exit-vr", function () {
+          // Elimina el componente cuando sale de VR
           camera.removeAttribute("auto-move");
         });
       }
