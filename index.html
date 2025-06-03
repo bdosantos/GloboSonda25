@@ -43,7 +43,7 @@
 
             // Ajustar velocidad según el dispositivo
             if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 500000"); // Más rápido en móviles y VR
+                camera.setAttribute("wasd-controls", "acceleration: 500"); // Más rápido en móviles y VR
             } else {
                 camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
             }
