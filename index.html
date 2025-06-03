@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Malasaña en la Estratosfera</title>
     <meta name="author" content="Begoña Dosantos">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
 <body>
-    <a-scene physics="debug: false">
-        <!-- Iluminación ajustada -->
+    <a-scene physics="debug: false" shadow="type: basic" renderer="antialias: false; colorManagement: false;">
+        <!-- Iluminación para evitar parpadeo -->
         <a-light type="ambient" color="#FFF"></a-light>
 
         <!-- Carga de modelos y vídeos -->
@@ -24,7 +24,7 @@
 
         <!-- Cámara VR con aceleración optimizada -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 80" position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
@@ -45,7 +45,7 @@
 
             // Ajustar velocidad según el dispositivo
             if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 150"); // Movilidad fluida en móviles y VR
+                camera.setAttribute("wasd-controls", "acceleration: 80"); // Movilidad fluida en móviles y VR
             } else {
                 camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
             }
