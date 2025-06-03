@@ -15,14 +15,14 @@
             <a-asset-item id="museo-glb" src="museo.glb"></a-asset-item>
             <a-asset-item id="globo-glb" src="globo.glb"></a-asset-item>
             <a-asset-item id="Gelectronica-glb" src="Gelectronica.glb"></a-asset-item>
-            <video id="videoLanzamiento" src="lanzamiento.mp4" autoplay loop muted playsinline></video>
-            <video id="videoEstratosfera" src="estratosfera.mp4" autoplay loop muted playsinline></video>
-            <video id="videoSeguimiento" src="seguimiento.mp4" autoplay loop muted playsinline></video>
+            <video id="videoLanzamiento" src="lanzamiento.mp4" loop crossorigin="anonymous" playsinline></video>
+            <video id="videoEstratosfera" src="estratosfera.mp4" loop crossorigin="anonymous" playsinline></video>
+            <video id="videoSeguimiento" src="seguimiento.mp4" loop crossorigin="anonymous" playsinline></video>
         </a-assets>
 
-        <!-- Cámara VR con velocidad ajustada -->
+        <!-- Cámara VR y controles adaptados a PC y móvil -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 50" position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
@@ -41,17 +41,17 @@
         document.addEventListener("DOMContentLoaded", function() {
             let camera = document.querySelector("#camera");
 
-            // Ajustar velocidad según el dispositivo
-            if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
-                camera.setAttribute("wasd-controls", "acceleration: 500000000000"); // Más rápido en móviles y VR
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                // Si es un móvil, ajustar controles
+                camera.setAttribute("wasd-controls", "acceleration: 100");
             } else {
-                camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
+                // Si es un ordenador, mantener velocidad estándar
+                camera.setAttribute("wasd-controls", "acceleration: 1000");
             }
 
-            // Forzar reproducción automática de vídeos
-            document.querySelectorAll("video").forEach(video => {
-                video.muted = true;
-                video.play().catch(error => console.log("Autoplay bloqueado:", error));
+            // Iniciar vídeos al hacer clic en la pantalla
+            document.addEventListener("click", function() {
+                document.querySelectorAll("video").forEach(video => video.play());
             });
         });
     </script>
