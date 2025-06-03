@@ -11,7 +11,7 @@
     <a-scene physics="debug: false" shadow="type: basic" renderer="antialias: false; colorManagement: false; logarithmicDepthBuffer: true">
         <!-- Iluminación corregida -->
         <a-light type="ambient" color="#BBB"></a-light>
-        <a-light type="directional" intensity="0.5" position="1 3 1"></a-light>
+        <a-light type="directional" intensity="0.25" position="1 3 1"></a-light>
 
         <!-- Carga de modelos y vídeos -->
         <a-assets>
@@ -30,8 +30,8 @@
 
         <!-- Modelo 3D del museo (reducido) -->
         <a-entity gltf-model="#museo2-glb" scale="1 0.5 1" position="0 0 0">
-            <a-entity gltf-model="#globo-glb" scale="0.2 0.2 0.2" position="-1 1.2 2"></a-entity>
-            <a-entity gltf-model="#Gelectronica-glb" scale="0.1 0.1 0.1" position="0 1 0"></a-entity>
+            <a-entity gltf-model="#globo-glb" scale="0.05 0.05 0.05" position="-1 1.2 2" rotation="90 0 180"></a-entity>
+            <a-entity gltf-model="#Gelectronica-glb" scale="0.01 0.01 0..1" position="0 1 0" rotation="90 0 180"></a-entity>
 
             <!-- Pantallas con vídeos dentro del museo -->
             <a-video src="#videoLanzamiento" position="-2 1 -1" width="1" height="0.75" rotation="0 90 0"></a-video>
