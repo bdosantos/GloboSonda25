@@ -20,9 +20,9 @@
             <video id="videoSeguimiento" src="seguimiento.mp4" autoplay loop muted playsinline></video>
         </a-assets>
 
-        <!-- Cámara VR -->
+        <!-- Cámara VR con velocidad ajustada -->
         <a-entity id="cameraRig" position="0 1.6 0">
-            <a-entity id="camera" camera look-controls wasd-controls position="0 0 0"></a-entity>
+            <a-entity id="camera" camera look-controls wasd-controls="acceleration: 50" position="0 0 0"></a-entity>
         </a-entity>
 
         <!-- Modelo 3D del museo -->
@@ -39,15 +39,21 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let videos = document.querySelectorAll("video");
+            let camera = document.querySelector("#camera");
 
-            // Forzar reproducción automática en dispositivos móviles y VR
-            videos.forEach(video => {
-                video.muted = true; // Algunos navegadores requieren que el vídeo esté silenciado para autoplay
+            // Ajustar velocidad según el dispositivo
+            if (/Android|iPhone|iPad|iPod|Oculus|VR/i.test(navigator.userAgent)) {
+                camera.setAttribute("wasd-controls", "acceleration: 500000"); // Más rápido en móviles y VR
+            } else {
+                camera.setAttribute("wasd-controls", "acceleration: 50"); // Velocidad estándar en PC
+            }
+
+            // Forzar reproducción automática de vídeos
+            document.querySelectorAll("video").forEach(video => {
+                video.muted = true;
                 video.play().catch(error => console.log("Autoplay bloqueado:", error));
             });
         });
     </script>
 </body>
 </html>
-
