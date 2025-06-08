@@ -1,44 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>El Malasaña en la Estratosfera</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-</head>
-<body>
-  <a-scene vr-mode-ui="enabled: true" shadow="enabled: false" renderer="colorManagement: true;">
-    
-    <!-- Iluminación -->
-    <a-light type="ambient" color="#FFFFFF" intensity="0.8"></a-light>
-    <a-light type="directional" color="#FFFFFF" intensity="1" position="0 5 5"></a-light>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Museo VR</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: #222">
+      <a-assets>
+        <a-asset-item id="museoModel" src="museo.glb"></a-asset-item>
+        <a-asset-item id="modeloElectronica" src="electronic.glb"></a-asset-item>
+        <video id="video1" src="video1.mp4" autoplay loop crossorigin="anonymous"></video>
+        <video id="video2" src="video2.mp4" autoplay loop crossorigin="anonymous"></video>
+      </a-assets>
 
-    <!-- Recursos -->
-    <a-assets>
-      <a-asset-item id="museoModel" src="museo2.glb"></a-asset-item>
-      <video id="video1" src="electronica.mp4" autoplay loop="true" muted playsinline></video>
-      <video id="video2" src="caja2.mp4" autoplay loop="true" muted playsinline></video>
-      <a-asset-item id="modeloElectronica" src="Gelectronica.glb"></a-asset-item>
-    </a-assets>
+      <!-- Museo reescalado y reubicado si hace falta -->
+      <a-entity gltf-model="#museoModel" scale="10 10 10" position="0 0 0"></a-entity>
 
-    <!-- Fondo -->
-    <a-sky color="#222"></a-sky>
+      <!-- Cámara dentro del museo -->
+      <a-entity position="0 1.6 0">
+        <a-camera wasd-controls look-controls>
+          <a-cursor></a-cursor>
+        </a-camera>
+      </a-entity>
 
-    <!-- Modelo del museo -->
-    <a-entity gltf-model="#museoModel" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      <!-- Vídeos colocados dentro del museo -->
+      <a-video src="#video1" position="0 2 -3" width="2.5" height="1.4"></a-video>
+      <a-video src="#video2" position="2 2 -3" width="2.5" height="1.4"></a-video>
 
-    <!-- Cámara con altura fija también en modo RV -->
-    <a-entity id="cameraRig" position="0 0.25 2">
-      <a-entity camera="userHeight: 0" wasd-controls look-controls position="0 0 0"></a-entity>
-    </a-entity>
+      <!-- Modelo 3D colocado dentro del museo -->
+      <a-entity gltf-model="#modeloElectronica" scale="0.5 0.5 0.5" position="-2 0 -3" rotation="0 45 0"></a-entity>
 
-    <!-- Vídeos dentro del museo (ajusta coordenadas según tu modelo) -->
-    <a-video src="#video1" position="0 1.5 -2" width="1.5" height="0.9" rotation="0 0 0"></a-video>
-    <a-video src="#video2" position="2 1.2 -1" width="1.2" height="0.7" rotation="0 -45 0"></a-video>
-
-    <!-- Modelo de electrónica -->
-    <a-entity gltf-model="#modeloElectronica" scale="0.05 0.05 0.05" position="-1 0 -1" rotation="0 45 0"></a-entity>
-
-  </a-scene>
-</body>
+      <!-- Luz ambiente -->
+      <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+      <a-entity light="type: directional; intensity: 0.5" position="1 4 1"></a-entity>
+    </a-scene>
+  </body>
 </html>
+
