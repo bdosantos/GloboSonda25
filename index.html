@@ -14,22 +14,22 @@
         <video id="vuelo" src="vuelo.mp4" autoplay loop crossorigin="anonymous"></video>
       </a-assets>
 
-      <!-- Museo reescalado y reubicado si hace falta -->
-      <a-entity gltf-model="#museo" scale="1 1 1" position="0 0 0"></a-entity>
+      <!-- Museo correctamente escalado y ubicado -->
+      <a-entity gltf-model="#museo" scale="10 10 10" position="0 0 0"></a-entity>
 
       <!-- Cámara dentro del museo -->
-      <a-entity position="0 0.6 0">
+      <a-entity position="0 1.5 0">
         <a-camera wasd-controls look-controls>
           <a-cursor></a-cursor>
         </a-camera>
       </a-entity>
 
       <!-- Vídeos colocados dentro del museo -->
-      <a-video src="#seguimiento" position="0 2 -3" width="0.5" height="0.25"></a-video>
-      <a-video src="#vuelo" position="2 2 -3" width="0.5" height="0.25"></a-video>
+      <a-video src="#seguimiento" position="0 1.8 0" width="2" height="1"></a-video>
+      <a-video src="#vuelo" position="2 1.8 0" width="2" height="1"></a-video>
 
       <!-- Modelo 3D colocado dentro del museo -->
-      <a-entity gltf-model="#modeloElectronica" scale="0.5 0.5 0.5" position="-2 0 -3" rotation="0 45 0"></a-entity>
+      <a-entity gltf-model="#Gelectronica" scale="0.3 0.3 0.3" position="-1 0.5 -1" rotation="0 45 0"></a-entity>
 
       <!-- Luz ambiente -->
       <a-entity light="type: ambient; intensity: 0.7"></a-entity>
