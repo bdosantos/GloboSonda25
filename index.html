@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>El Malasaña en la Estratosfera</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Begoña Dosantos" />
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
 <body>
   <a-scene vr-mode-ui="enabled: true" shadow="enabled: false" renderer="colorManagement: true;">
-    
     <!-- Iluminación -->
-    <a-light type="ambient" color="#FFFFFF" intensity="0.8"></a-light>
-    <a-light type="directional" color="#FFFFFF" intensity="1" position="0 5 5"></a-light>
+    <a-light type="ambient" color="#FFFFFF" intensity="0.5"></a-light>
+    <a-light type="directional" color="#FFFFFF" intensity="1" position="1 3 1"></a-light>
 
-    <!-- Recursos -->
+    <!-- Activos -->
     <a-assets>
-      <a-asset-item id="museoModel" src="museo2.glb"></a-asset-item>
-      <video id="video1" src="electronica.mp4" autoplay loop="true" muted playsinline></video>
-      <video id="video2" src="caja2.mp4" autoplay loop="true" muted playsinline></video>
-      <a-asset-item id="modeloElectronica" src="Gelectronica.glb"></a-asset-item>
+      <a-asset-item id="museo2-glb" src="museo2.glb"></a-asset-item>
+      <a-asset-item id="electronica-mp4" src="electronica.mp4"></a-asset-item>
+      <a-asset-item id="caja2-mp4" src="caja2.mp4"></a-asset-item>
+      <a-asset-item id="Gelectronica-glb" src="Gelectronica.glb"></a-asset-item>
     </a-assets>
 
-    <!-- Fondo -->
-    <a-sky color="#222"></a-sky>
+    <!-- Cielo -->
+    <a-sky color="#222222"></a-sky>
 
-    <!-- Modelo del museo -->
-    <a-entity gltf-model="#museoModel" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+    <!-- Escena escalada -->
+    <a-entity gltf-model="#museo2-glb" scale="0.005 0.005 0.005" position="0 0 0">
+      
+      <!-- Cámara reubicada -->
+      <a-entity id="cameraRig" position="0 0.0025 -0.005">
+        <a-entity id="camera" camera look-controls wasd-controls="acceleration: 2" position="0 0.0025 0"></a-entity>
+      </a-entity>
 
-    <!-- Cámara fuera del modelo pero cerca -->
-    <a-entity id="cameraRig" position="0 1.6 2">
-      <a-entity camera wasd-controls look-controls position="0 0 0"></a-entity>
+      <!-- Vídeos reescalados -->
+      <a-video src="electronica.mp4" position="2.48 0.005 0.0025" scale="0.5 0.5 0.5" autoplay loop muted rotation="0 90 0"></a-video>
+      <a-video src="caja2.mp4" position="-0.005 0.005 -0.01015" scale="0.1 0.1 0.1" autoplay loop muted rotation="0 180 0"></a-video>
+
+      <!-- Modelo electrónico reducido -->
+      <a-entity gltf-model="#Gelectronica-glb" scale="0.1 0.1 0.1" position="2.5 0.5 0.0025" rotation="90 -90 0"></a-entity>
+
     </a-entity>
-
-    <!-- Vídeos dentro del museo (ajusta coordenadas según tu modelo) -->
-    <a-video src="#video1" position="0 1.5 -2" width="1.5" height="0.9" rotation="0 0 0"></a-video>
-    <a-video src="#video2" position="2 1.2 -1" width="1.2" height="0.7" rotation="0 -45 0"></a-video>
-
-    <!-- Modelo de electrónica -->
-    <a-entity gltf-model="#modeloElectronica" scale="0.05 0.05 0.05" position="-1 0 -1" rotation="0 45 0"></a-entity>
-
   </a-scene>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let cameraRig = document.querySelector("#cameraRig");
+      cameraRig.setAttribute("position", "0 0.0025 -0.005");
+
+      document.querySelectorAll("video").forEach((video) => {
+        video.muted = true;
+        video.play().catch((error) => console.log("Autoplay bloqueado:", error));
+      });
+    });
+  </script>
 </body>
 </html>
-
