@@ -8,14 +8,14 @@
   <body>
     <a-scene background="color: #222">
       <a-assets>
-        <a-asset-item id="museoModel" src="museo.glb"></a-asset-item>
+        <a-asset-item id="museo" src="museo.glb"></a-asset-item>
         <a-asset-item id="modeloElectronica" src="electronic.glb"></a-asset-item>
         <video id="video1" src="video1.mp4" autoplay loop crossorigin="anonymous"></video>
         <video id="video2" src="video2.mp4" autoplay loop crossorigin="anonymous"></video>
       </a-assets>
 
       <!-- Museo reescalado y reubicado si hace falta -->
-      <a-entity gltf-model="#museoModel" scale="10 10 10" position="0 0 0"></a-entity>
+      <a-entity gltf-model="#museo" scale="1 1 1" position="0 0 0"></a-entity>
 
       <!-- Cámara dentro del museo -->
       <a-entity position="0 1.6 0">
@@ -25,8 +25,8 @@
       </a-entity>
 
       <!-- Vídeos colocados dentro del museo -->
-      <a-video src="#video1" position="0 2 -3" width="2.5" height="1.4"></a-video>
-      <a-video src="#video2" position="2 2 -3" width="2.5" height="1.4"></a-video>
+      <a-video src="#video1" position="0 2 -3" width="0.5" height="0.25"></a-video>
+      <a-video src="#video2" position="2 2 -3" width="0.5" height="0.25"></a-video>
 
       <!-- Modelo 3D colocado dentro del museo -->
       <a-entity gltf-model="#modeloElectronica" scale="0.5 0.5 0.5" position="-2 0 -3" rotation="0 45 0"></a-entity>
